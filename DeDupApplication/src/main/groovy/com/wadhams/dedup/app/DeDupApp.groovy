@@ -1,8 +1,6 @@
 package com.wadhams.dedup.app
 
 import com.wadhams.dedup.controller.DeDupController
-import com.wadhams.dedup.controller.DoubleController
-import com.wadhams.dedup.controller.SingleController
 import com.wadhams.dedup.type.Extension
 import com.wadhams.dedup.type.Mode
 

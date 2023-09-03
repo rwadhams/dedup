@@ -1,13 +1,13 @@
 package com.wadhams.dedup.controller
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 import com.wadhams.dedup.biz.DupChecker
-import com.wadhams.dedup.service.DupCheckerService
 import com.wadhams.dedup.service.ReportingService
 import com.wadhams.dedup.service.ScriptingService
 import com.wadhams.dedup.type.Extension
 import com.wadhams.dedup.type.Mode
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class DeDupController {
 	ReportingService reportingService = new ReportingService()
