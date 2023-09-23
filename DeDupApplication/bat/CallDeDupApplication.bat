@@ -1,0 +1,3 @@
+call DeDupApplication.bat
+
+pause
