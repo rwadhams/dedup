@@ -1,5 +1,6 @@
 package com.wadhams.dedup.biz
 
+import java.security.DigestInputStream
 import java.security.MessageDigest
 import com.wadhams.dedup.type.Extension
 
@@ -8,7 +9,6 @@ import static groovy.io.FileType.FILES
 class DupChecker {
 	Map<BigInteger, List<String>> dupMap = [:]	//key=message digest value, value(s)=absolute path to each file
 	
-	MessageDigest md = MessageDigest.getInstance("MD5")
 	int counter = 1
 	int printProgress = 50	//used to calculate when to print a progress message
 		
@@ -29,6 +29,8 @@ class DupChecker {
 	}
 	
 	def findDupsInternal(Extension matchingExtension, String folderPath) {
+		MessageDigest md = MessageDigest.getInstance("MD5")
+		
 		def baseDir = new File(folderPath)
 		baseDir.eachFileRecurse(FILES) {f ->
 			String filename = f.name
@@ -38,8 +40,10 @@ class DupChecker {
 			}
 			
 			String absolutePath = f.getAbsolutePath()
-			byte[] messageDigest = md.digest(f.getBytes())
-			BigInteger num = new BigInteger(1, messageDigest)
+			//println absolutePath
+			
+			BigInteger num = new BigInteger(1, digest(f, md))
+			//println num
 			List<String> filenameList = dupMap[num]
 			if (filenameList == null) {
 				filenameList = []
@@ -54,5 +58,15 @@ class DupChecker {
 			}
 			counter++
 		}
+	}
+	
+	def byte[] digest(File f, MessageDigest md) throws IOException {
+		md.reset()
+		InputStream is = f.newInputStream()
+		DigestInputStream dis = new DigestInputStream(is, md)
+		while (dis.read() != -1) {
+			//loop until all bytes read from stream
+		}
+		return md.digest()
 	}
 }
