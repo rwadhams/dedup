@@ -3,16 +3,17 @@ package com.wadhams.dedup.type
 import java.util.regex.Pattern
 
 enum Extension {
-	PDF('PDF', ['PDF']),
-	EPub('EPUB', ['EPUB']),
 	Docx('DOCX', ['DOCX']),
-	Txt('TXT', ['TXT']),
+	EPub('EPUB', ['EPUB']),
+	HEIC('HEIC', ['HEIC']),
+	JPG('JPG', ['JPG','JPEG']),
+	M4A('M4A', ['M4A']),
+	MOV('MOV', ['MOV']),
 	MP3('MP3', ['MP3']),
 	MP4('MP4', ['MP4']),
+	PDF('PDF', ['PDF']),
+	Txt('TXT', ['TXT']),
 	WMA('WMA', ['WMA']),
-	JPG('JPG', ['JPG','JPEG']),
-	MOV('MOV', ['MOV']),
-	HEIC('HEIC', ['HEIC']),
 	Unknown('', ['Unknown']);
 	
 	private static Pattern extensionPattern = ~/.*\.(\w{3,4})$/
